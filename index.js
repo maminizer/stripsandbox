@@ -1,3 +1,6 @@
+import { WorkItem } from "./js/workItem.js";
+import { Preview } from "./js/preview.js";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const lenis = new Lenis({
@@ -509,94 +512,321 @@ ScrollTrigger.create({
   markers: false, // Reference to your GSAP animation
 });
 
-const lettersAndSymbols = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-  "!",
-  "@",
-  "#",
-  "$",
-  "%",
-  "^",
-  "&",
-  "*",
-  "-",
-  "_",
-  "+",
-  "=",
-  ";",
-  ":",
-  "<",
-  ">",
-  ",",
-];
-const fx8Titles = [
-  ...document.querySelectorAll(
-    ".content__title__work[data-splitting][data-effect8]"
-  ),
-];
 
-const titleEventsAnimation = (title) => {
-  const chars = title.querySelectorAll(".char");
-  chars.forEach((char, position) => {
-    let initialHTML = char.innerHTML;
-    gsap.fromTo(
-      char,
+
+
+// work subsection
+const body = document.body;
+
+// .content element
+const contentEl = document.querySelector(".work-subcontent");
+
+// top and bottom overlay overlay elements
+const overlayRows = [...document.querySelectorAll(".overlay__row")];
+
+// Preview instances array
+const previews = [];
+[...document.querySelectorAll(".preview")].forEach((preview) =>
+  previews.push(new Preview(preview))
+);
+
+// Item instances array
+const items = [];
+[...document.querySelectorAll(".item")].forEach((item, pos) =>
+  items.push(new WorkItem(item, previews[pos]))
+);
+
+console.log(items);
+const openItem = (item) => {
+  gsap
+    .timeline({
+      defaults: {
+        duration: 1,
+        ease: "power3.inOut",
+      },
+    })
+    .add(() => {
+      // pointer events none to the content
+      contentEl.classList.add("content--hidden");
+    }, "start")
+
+    .addLabel("start", 0)
+    .set(
+      [item.preview.DOM.innerElements, item.preview.DOM.backCtrl],
       {
         opacity: 0,
       },
+      "start"
+    )
+    .to(
+      overlayRows,
       {
-        duration: 0.05,
-        innerHTML: () =>
-          lettersAndSymbols[
-            Math.floor(Math.random() * lettersAndSymbols.length)
-          ],
-        repeat: 1,
-        repeatRefresh: true,
-        opacity: 1,
-        repeatDelay: 0.03,
-        delay: (position + 1) * 0.18,
-        onComplete: () =>
-          gsap.set(char, { innerHTML: initialHTML, delay: 0.03 }),
-        scrollTrigger: {
-          trigger: title,
-          start: "top bottom",
-          end: "bottom center",
-          toggleActions: "play resume resume reset",
-          onEnter: () => gsap.set(char, { opacity: 0 }),
-        },
+        scaleY: 1,
+      },
+      "start"
+    )
+
+    .addLabel("content", "start+=0.6")
+
+    .add(() => {
+      body.classList.add("preview-visible");
+      body.style.overflow = "hidden";
+      item.preview.DOM.el.classList.add("preview--current");
+    }, "content")
+    // Image animation (reveal animation)
+    .to(
+      [item.preview.DOM.image, item.preview.DOM.imageInner],
+      {
+        startAt: { y: (pos) => (pos ? "101%" : "-101%") },
+        y: "0%",
+      },
+      "content"
+    )
+
+    .add(() => {
+      for (const line of item.preview.multiLines) {
+        line.in();
       }
+      gsap.set(item.preview.DOM.multiLineWrap, {
+        opacity: 1,
+        delay: 0.1,
+      });
+    }, "content")
+    // animate frame element
+    .to(
+      item.preview.DOM.innerElements,
+      {
+        ease: "expo",
+        startAt: { yPercent: 101 },
+        yPercent: 0,
+        opacity: 1,
+      },
+      "content+=0.3"
+    )
+    .to(
+      item.preview.DOM.backCtrl,
+      {
+        opacity: 1,
+      },
+      "content"
     );
-  });
 };
 
-const eventParagraphFade = () => {
-  fx8Titles.forEach((title) => {
-    titleEventsAnimation(title);
-  });
+const closeItem = (item) => {
+  gsap
+    .timeline({
+      defaults: {
+        duration: 1,
+        ease: "power3.inOut",
+      },
+    })
+    .addLabel("start", 0)
+    .to(
+      item.preview.DOM.innerElements,
+      {
+        yPercent: -101,
+        opacity: 0,
+      },
+      "start"
+    )
+    .add(() => {
+      body.style.overflowY = "visible";
+      for (const line of item.preview.multiLines) {
+        line.out();
+      }
+    }, "start")
+
+    .to(
+      item.preview.DOM.backCtrl,
+      {
+        opacity: 0,
+      },
+      "start"
+    )
+
+    .to(
+      item.preview.DOM.image,
+      {
+        y: "101%",
+      },
+      "start"
+    )
+    .to(
+      item.preview.DOM.imageInner,
+      {
+        y: "-101%",
+      },
+      "start"
+    )
+
+    // animate frame element
+
+    .addLabel("grid", "start+=0.6")
+
+    .to(
+      overlayRows,
+      {
+        //ease: 'expo',
+        scaleY: 0,
+        onComplete: () => {
+          item.preview.DOM.el.classList.remove("preview--current");
+          contentEl.classList.remove("content--hidden");
+        },
+      },
+      "grid"
+    );
 };
-eventParagraphFade();
+
+for (const item of items) {
+  // Opens the item preview
+  item.DOM.link.addEventListener("click", () => openItem(item));
+  // Closes the item preview
+  item.preview.DOM.backCtrl.addEventListener("click", () => closeItem(item));
+}
+
+
+// animate text on scroll 
+
+const tl_intro = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".intro-container",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    markers: 0,
+}});
+
+tl_intro.from(
+  ".introduction",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".introduction",
+  {
+    y: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+.from(
+  ".quote",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".quote",
+  {
+    y: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+.from(
+  ".quotation-mark",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".quotation-mark",
+  {
+    y: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+
+const tl_about = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".welcome-container",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_about.from(
+  ".left-welcome",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start+=10%"
+)
+.from(
+  ".left-welcome",
+  {
+    x: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start"
+)
+
+const tl_welcome = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".about-discription",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_welcome.from(
+  ".contentLeft",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start+=10%"
+)
+.from(
+  ".contentLeft",
+  {
+    x: "-30%",
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start"
+)
+.from(
+  ".contentRight",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start+=10%"
+)
+.from(
+  ".contentRight",
+  {
+    x: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+    stagger : 0.05
+  },
+  "start"
+)
