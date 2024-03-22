@@ -15,15 +15,6 @@
   font-style: normal;
   font-weight: normal;
 }
-
-/* @font-face {
-  src: url("../fontsMrDeHaviland-Regular.ttf")
-      format("ttf");
-  font-family: "Mr De Haviland";
-  font-style: normal;
-  font-weight: 400;
-} */
-
 @import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
 
 /* lenis css  */
@@ -415,7 +406,7 @@ body {
   background-color: #222;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 6.125rem 3rem;
 }
 
@@ -811,7 +802,47 @@ body {
     0 100px 80px rgba(0, 0, 0, 0.12);
   width: 40%;
 }
+/* event 2  */
+.event-3-wrapper{
+  width: 100vw;
+  justify-content: center;
+  padding: 0 5rem;
+  padding-bottom: 10rem;
+}
+.event-3-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 100px 30px;
+  width: 100%;
+}
+.img-item {
+  min-height: 50vh;
+}
+.item1 {
+  background-image: url('./img/Events1.png');
+  background-size: cover;
+  
+}
 
+.item4 {
+  background-image: url('./img/Events2.jpg');
+  background-size: cover;
+}
+
+.item5 {
+  background-image: url('./img/Events3.jpg');
+  background-size: cover;
+}
+.text-item {
+  min-height: 60vh;
+  font-size: 2rem;
+  padding: 20px;
+  /* text-align: justify; */
+  line-height: 2.5rem;
+  display: grid;
+  align-items: center;
+}
 /* our work  */
 
 .work {
@@ -1282,7 +1313,6 @@ body {
   }
 
   .about-container {
-    /* background-color: tomato; */
     transform: translateY(60vh);
     display: flex;
     flex-direction: column;
@@ -1296,16 +1326,39 @@ body {
     text-align: justify;
     font-family: "Roslindale Display Condensed";
   }
+
+  .event-3-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+    gap: 0px 0px ;
+  }
+  .text-item {
+    font-size: 1.5em;
+    text-align: justify;
+    line-height: 1em;
+  }
+
+  .item1 {
+    order : 2;
+  }
+
+  .item4 {
+    order : 4;
+  }
+
+  .item5 {
+    order : 6;
+  }
+
+  .item2 {
+    order : 1;
+  }
+
+  .item3 {
+    order : 3;
+  }
+  
+  .item6 {
+    order : 5;
+  }
 }
-
-/* 
-@media only screen and (min-width: 768px) and (max-width: 1100px) {
-
-  body {
-    background-color: coral;
-  }
-
-  .intro-container {
-    transform: translateY(-19vw);
-  }
-} */
