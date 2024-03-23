@@ -1000,3 +1000,176 @@ tl_event_3_6.from(
   },
   "start"
 )
+
+
+// experiences section animation 
+
+const tl_experience_1 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".text-1",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_experience_1.from(
+  ".text-1",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".text-1",
+  {
+    y: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+
+const tl_experience_2 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".Img-1",
+    start: "top bottom",
+    // end: "bottom bottom",
+    scrub: 1,
+    markers: 1,
+}});
+
+tl_experience_2.from(
+  ".Img-1",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".Img-1",
+  {
+    x: "-30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+
+const tl_experience_3 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".img-2",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_experience_3.from(
+  ".img-2",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+    delay : 1,
+  },
+  "start+=10%"
+)
+.from(
+  ".img-2",
+  {
+    x: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+    delay : 1,
+  },
+  "start"
+)
+
+const tl_experience_4 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".text-2",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_experience_4.from(
+  ".text-2",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".text-2",
+  {
+    x: "30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+
+const tl_experience_5 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".img-3",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    // markers: 1,
+}});
+
+tl_experience_5.from(
+  ".img-3",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".img-3",
+  {
+    x: "-30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
+
+const tl_experience_6 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".text-3",
+    start: "top bottom",
+    end: "bottom bottom",
+    scrub: 1,
+    markers: 1,
+}});
+
+tl_experience_6.from(
+  ".text-3",
+  {
+    opacity: 0,
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start+=10%"
+)
+.from(
+  ".text-3",
+  {
+    y: "-30%",
+    duration: 1,
+    ease: "power4.inOut",
+  },
+  "start"
+)
