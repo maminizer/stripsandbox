@@ -536,7 +536,6 @@ const items = [];
   items.push(new WorkItem(item, previews[pos]))
 );
 
-console.log(items);
 const openItem = (item) => {
   gsap
     .timeline({
@@ -696,25 +695,25 @@ const tl_intro = gsap.timeline({
     markers: 0,
 }});
 
+// tl_intro.from(
+//   ".introduction",
+//   {
+//     opacity: 0,
+//     duration: 1,
+//     ease: "power4.inOut",
+//   },
+//   "start+=10%"
+// )
+// .from(
+//   ".introduction",
+//   {
+//     y: "30%",
+//     duration: 1,
+//     ease: "power4.inOut",
+//   },
+//   "start"
+// )
 tl_intro.from(
-  ".introduction",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".introduction",
-  {
-    y: "30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-.from(
   ".quote",
   {
     opacity: 0,
@@ -830,178 +829,6 @@ tl_welcome.from(
   },
   "start"
 )
-// event section 
-
-const tl_event_3_1 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item1",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_1.from(
-  ".item1",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item1",
-  {
-    x: "-30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-const tl_event_3_2 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item2",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_2.from(
-  ".item2",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item2",
-  {
-    x: "30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-
-const tl_event_3_3 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item3",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_3.from(
-  ".item3",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item3",
-  {
-    x: "-30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-const tl_event_3_4 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item4",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_4.from(
-  ".item4",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item4",
-  {
-    x: "30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-const tl_event_3_5 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item5",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_5.from(
-  ".item5",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item5",
-  {
-    x: "-30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-const tl_event_3_6 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".item6",
-    start: "top bottom",
-    end: "bottom bottom",
-    scrub: 1,
-    // markers: 1,
-}});
-
-tl_event_3_6.from(
-  ".item6",
-  {
-    opacity: 0,
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start+=10%"
-)
-.from(
-  ".item6",
-  {
-    x: "30%",
-    duration: 1,
-    ease: "power4.inOut",
-  },
-  "start"
-)
-
-
 // experiences section animation 
 
 const tl_experience_1 = gsap.timeline({
@@ -1036,9 +863,9 @@ const tl_experience_2 = gsap.timeline({
   scrollTrigger: {
     trigger: ".Img-1",
     start: "top bottom",
-    // end: "bottom bottom",
+    end: "bottom bottom",
     scrub: 1,
-    markers: 1,
+    // markers: 1,
 }});
 
 tl_experience_2.from(
@@ -1152,7 +979,7 @@ const tl_experience_6 = gsap.timeline({
     start: "top bottom",
     end: "bottom bottom",
     scrub: 1,
-    markers: 1,
+    // markers: 1,
 }});
 
 tl_experience_6.from(
@@ -1170,6 +997,131 @@ tl_experience_6.from(
     y: "-30%",
     duration: 1,
     ease: "power4.inOut",
+  },
+  "start"
+)
+
+
+lenis.stop();
+// storytelling section 
+
+let lenis_new;
+// Selecting DOM elements
+const contentElements = [...document.querySelectorAll('.content--sticky')];
+const totalContentElements = contentElements.length;
+
+// Initializes Lenis for smooth scrolling with specific properties
+const initSmoothScrolling = () => {
+	// Instantiate the Lenis object with specified properties
+	lenis_new = new Lenis({
+		lerp: 0.2, // Lower values create a smoother scroll effect
+		smoothWheel: true // Enables smooth scrolling for mouse wheel events
+	});
+
+	// Update ScrollTrigger each time the user scrolls
+	lenis_new.on('scroll', () => ScrollTrigger.update());
+
+	// Define a function to run at each animation frame
+	const scrollFn = (time) => {
+		lenis_new.raf(time); // Run Lenis' requestAnimationFrame method
+		requestAnimationFrame(scrollFn); // Recursively call scrollFn on each frame
+	};
+	// Start the animation frame loop
+	requestAnimationFrame(scrollFn);
+};
+
+// Function to handle scroll-triggered animations
+const scroll_story = () => {
+
+    contentElements.forEach((el, position) => {
+        
+		const isLast = position === totalContentElements-1;
+		const isPreLast = position === totalContentElements-2;
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: el,
+                start: () => {
+					if ( isLast ) {
+						return 'top top';
+					}
+					else if ( isPreLast ) {
+						return 'bottom top';
+					}
+					else {
+						return 'bottom+=100% top';
+					}
+				},
+                end: '+=100%',
+                scrub: true
+            }
+        })
+        .to(el, {
+			ease: 'none',
+            yPercent: -100
+        }, 0)
+
+
+    });
+  }
+
+// Initialization function
+const init = () => {
+    initSmoothScrolling(); // Initialize Lenis for smooth scrolling
+    scroll_story(); // Apply scroll-triggered animations
+};
+
+init();
+
+
+const tl_storytelling_1 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".seperator-storytelling",
+    start: "top bottom-=10%",
+}});
+
+tl_storytelling_1.from(
+  ".seperator-storytelling",
+  {
+    opacity: 0,
+    duration: 1.5,
+    ease: "power4.out",
+  },
+  "start+=10%"
+)
+.from(
+  ".seperator-storytelling",
+  {
+    x: "100%",
+    duration: 1.5,
+    ease: "power4.out",
+  },
+  "start"
+)
+
+
+
+const tl_events_sep = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".seperator-events",
+    start: "top bottom-=10%",
+}});
+
+tl_events_sep.from(
+  ".seperator-events",
+  {
+    opacity: 0,
+    duration: 1.5,
+    ease: "power4.out",
+  },
+  "start+=10%"
+)
+.from(
+  ".seperator-events",
+  {
+    x: "-100%",
+    duration: 1.5,
+    ease: "power4.out",
   },
   "start"
 )
