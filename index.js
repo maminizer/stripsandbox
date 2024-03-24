@@ -1,6 +1,6 @@
 import { WorkItem } from "./js/workItem.js";
 import { Preview } from "./js/preview.js";
-
+import {preloadImages} from "./js/utils.js"
 gsap.registerPlugin(ScrollTrigger);
 
 const lenis = new Lenis({
@@ -14,8 +14,10 @@ gsap.ticker.add((time) => {
 });
 lenis.stop();
 
-window.addEventListener("load", () => {
-  // this is the logic
+
+preloadImages('img').then(() => {
+  // Once images are preloaded, remove the 'loading' indicator/class from the body
+  document.body.classList.remove('loading');
   panelloader();
 });
 
@@ -108,6 +110,7 @@ const panelloader = () => {
         x: "-0.05%",
         delay: 1,
         duration: 2,
+        opacity : 1,
         ease: "power4.inOut",
       },
       "start"
