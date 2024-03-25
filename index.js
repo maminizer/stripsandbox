@@ -482,7 +482,7 @@ const eventAnimation = gsap.to(
 ScrollTrigger.create({
   trigger: ".events-transition",
   start: "top top",
-  // end: "+=768",
+  end: "+=30%",
   scrub: true,
   pin: true,
   animation: eventAnimation,
@@ -497,7 +497,7 @@ const eventImageFadeAnimation = gsap.to(".fullwidth-image__overlay", {
 ScrollTrigger.create({
   trigger: ".events-transition",
   start: "top top",
-  end: "+=768",
+  end: "+=30%",
   scrub: 1,
   animation: eventImageFadeAnimation,
   markers: false, // Reference to your GSAP animation
@@ -509,7 +509,7 @@ const eventTextAnimation = gsap.from(".fullwidth-image__text", { opacity: 0 });
 ScrollTrigger.create({
   trigger: ".events-transition",
   start: "top top",
-  end: "+=768",
+  end: "+=30%",
   scrub: 1,
   animation: eventTextAnimation,
   markers: false, // Reference to your GSAP animation

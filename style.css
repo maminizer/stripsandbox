@@ -16,28 +16,9 @@
   font-weight: normal;
 } */
 
-/* latin-ext */
-@font-face {
-  font-family: 'Mr De Haviland';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/mrdehaviland/v14/OpNVnooIhJj96FdB73296ksbOg3L60PlNQ.woff2) format('woff2');
-  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Mr De Haviland';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/mrdehaviland/v14/OpNVnooIhJj96FdB73296ksbOg3F60M.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 @import url('https://fonts.cdnfonts.com/css/roslindale');
 @import url('https://fonts.cdnfonts.com/css/overused-grotesk');
-/* @import url("https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap");
 
 
 /* Page Loader */
@@ -76,8 +57,12 @@
 body {
   height: 100%;
   overflow-x: hidden;
-  font-family: "'Overused Grotesk', sans-serif";
+  font-family: 'Overused Grotesk', sans-serif;
   --color-bg-menu: #fff;
+  --paragraph-font : 'Overused Grotesk', sans-serif;
+  --paragraph-size: 1.5rem;
+  --paragraph-line-height : 1.8rem;
+  --font-weight : 100
 }
 
 /* icon assets  */
@@ -393,17 +378,18 @@ body {
 .hero-container {
   display: grid;
   place-content: center;
-  height: 68vh;
-  transform: translateY(-50px);
+  height: 25vh;
+  /* background: #d35400; */
+  /* transform: translateY(-50px); */
 }
 
 .hero-container h1 {
-  font-size: 15vw;
+  font-size: 8vw;
   text-transform: uppercase;
   font-family: "'Overused Grotesk', sans-serif";
   font-weight: 600;
   color: #333;
-  transform: translateY(18vh);
+  /* transform: translateY(18vh); */
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -435,7 +421,7 @@ body {
 
 .intro-container {
   position: absolute;
-  top: 170vh;
+  top: 120vh;
   height: 50vh;
   background-color: #222;
   width: 100%;
@@ -483,7 +469,7 @@ body {
 .welcome-container {
   width: 100vw;
   height: 80vh;
-  transform: translateY(45vh);
+  transform: translateY(40vh);
   display: flex;
   flex-direction: row;
   padding: 3rem 10rem;
@@ -532,7 +518,7 @@ body {
 /* about us  section  */
 .about-container {
   /* background-color: tomato; */
-  transform: translateY(40vh);
+  transform: translateY(45vh);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -635,12 +621,14 @@ body {
   color: #fff;
 }
 .contentRight .content p {
-  font-size: 18px;
   color: #fff;
-  line-height: 28px;
   padding-bottom: 10px;
-  font-family: "'Overused Grotesk', sans-serif";
   text-align: justify;
+  font-family: var(--paragraph-font);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line-height );
+  font-weight: var(--font-weight);
+  
 }
 .contentRight .content a {
   display: inline-block;
@@ -714,12 +702,12 @@ body {
 }
 
 .experience-text {
-  color: #000;
-  font-size: 1.5rem;
   text-align: justify;
-  line-height: 1.3;
   color: #fff;
-  font-weight: lighter;
+  font-family: var(--paragraph-font);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line-height );
+  font-weight: var(--font-weight);
 }
 
 .text-1 {
@@ -888,7 +876,7 @@ body {
 .events-transition-wrapper {
   background-color: #222;
   width: 100%;
-  height: 260vh;
+  height: 200vh;
 }
 .events-transition {
   position: absolute;
@@ -915,6 +903,7 @@ body {
   transform: translate(-50%, -50%);
   z-index: 3;
   color: white;
+  text-align: center;
 }
 
 .events-transition p {
@@ -1143,14 +1132,15 @@ body {
 .content__title {
   grid-area: content-title;
   /* letter-spacing: -0.095em; */
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   line-height: 1;
-  font-weight: normal;
+  font-weight :bold;
   font-size: clamp(2rem, 6vw, 5rem);
   margin: 0;
   color: #222;
   margin: 1rem;
-  font-variation-settings: "slnt" 0, "wdth" 400, "wght" 900, "INKT" 400;
+  font-family: var(--paragraph-font);
+  /* font-variation-settings: "slnt" 0, "wdth" 400, "wght" 900, "INKT" 400; */
 }
 
 .content__text {
@@ -1485,7 +1475,7 @@ body {
   }
 
   .content__img--large {
-    width: 160%;
+    width: 40vw;
   }
   .content__img--left {
     justify-self: end;
@@ -1667,7 +1657,7 @@ body {
   }
 
   .about-container {
-    transform: translateY(60vh);
+    transform: translateY(70vh);
     display: flex;
     flex-direction: column;
     align-items: center;
